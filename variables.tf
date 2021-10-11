@@ -3,6 +3,16 @@ variable "region" {
   default = "ca-central-1"
 }
 
+variable "az_1" {
+  type    = string
+  default = "ca-central-1a"
+}
+
+variable "az_2" {
+  type    = string
+  default = "ca-central-1b"
+}
+
 variable "vpc_cidr_block" {
   type        = string
   default     = "10.0.0.0/16"
