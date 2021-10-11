@@ -1,7 +1,7 @@
 [
   {
-    "name": "presto-coordinator",
-    "image": "lewuathe/presto-coordinator:${presto_version}",
+    "name": "presto-dbx-coordinator",
+    "image": "saj1th/presto-dbx-coordinator:${presto_version}",
     "essential": true,
     "cpu": 2048,
     "portMappings": [

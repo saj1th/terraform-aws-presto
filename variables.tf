@@ -1,6 +1,6 @@
 variable "region" {
   type    = string
-  default = "us-east-1"
+  default = "ca-central-1"
 }
 
 variable "vpc_cidr_block" {
@@ -36,6 +36,6 @@ variable "cluster_capacity" {
 
 variable "presto_version" {
   type        = string
-  default     = "330-SNAPSHOT"
-  description = "The tag of the docker image used in the cluster. See https://hub.docker.com/repository/docker/lewuathe/presto-base/tags for available tags."
+  default     = "0.263"
+  description = "The tag of the docker image used in the cluster. See https://hub.docker.com/r/saj1th/presto-base/tags for available tags."
 }

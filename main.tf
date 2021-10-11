@@ -22,7 +22,7 @@ resource "aws_subnet" "public_0" {
   vpc_id                  = aws_vpc.presto.id
   cidr_block              = var.public_0_cidr_block
   map_public_ip_on_launch = true
-  availability_zone       = "us-east-1a"
+  availability_zone       = "ca-central-1a"
 
   tags = {
     Name = "Presto Public Subnet 0"
@@ -33,7 +33,7 @@ resource "aws_subnet" "public_1" {
   vpc_id                  = aws_vpc.presto.id
   cidr_block              = var.public_1_cidr_block
   map_public_ip_on_launch = true
-  availability_zone       = "us-east-1c"
+  availability_zone       = "ca-central-1b"
 
   tags = {
     Name = "Presto Public Subnet 1"
@@ -70,7 +70,7 @@ resource "aws_subnet" "private_0" {
   vpc_id                  = aws_vpc.presto.id
   cidr_block              = var.private_0_cidr_block
   map_public_ip_on_launch = false
-  availability_zone       = "us-east-1a"
+  availability_zone       = "ca-central-1a"
 
   tags = {
     Name = "Presto Private Subnet 0"
@@ -81,7 +81,7 @@ resource "aws_subnet" "private_1" {
   vpc_id                  = aws_vpc.presto.id
   cidr_block              = var.private_1_cidr_block
   map_public_ip_on_launch = false
-  availability_zone       = "us-east-1c"
+  availability_zone       = "ca-central-1b"
 
   tags = {
     Name = "Presto Private Subnet 1"

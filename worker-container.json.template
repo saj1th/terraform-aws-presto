@@ -1,7 +1,7 @@
 [
   {
-    "name": "presto-worker",
-    "image": "lewuathe/presto-worker:${presto_version}",
+    "name": "presto-dbx-worker",
+    "image": "saj1th/presto-dbx-worker:${presto_version}",
     "essential": true,
     "cpu": 2048,
     "portMappings": [

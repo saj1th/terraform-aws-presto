@@ -1,11 +1,11 @@
-# terraform-aws-presto ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/Lewuathe/terraform-aws-presto) ![GitHub](https://img.shields.io/github/license/Lewuathe/terraform-aws-presto)
-Terraform module to create [Presto cluster](https://prestosql.io/). The cluster runs on top of AWS Fargate using docker image published by [Lewuathe](https://github.com/Lewuathe/docker-presto-cluster/)
+# terraform-aws-presto
+Terraform module to create [Presto cluster](https://prestodb.io/). 
 
 # Usage
 
 ```terraform
 module "presto" {
-  source           = "github.com/Lewuathe/terraform-aws-presto"
+  source           = "github.com/saj1th/terraform-aws-presto"
   cluster_capacity = 2
 }
 
@@ -22,7 +22,7 @@ $ ./presto-cli --server http://presto-XXXX.us-east-1.elb.amazonaws.com --catalog
 
 # Overview
 
-![Overview](https://github.com/Lewuathe/terraform-aws-presto/blob/master/overview.png?raw=true)
+![Overview](https://github.com/saj1th/terraform-aws-presto/blob/master/overview.png?raw=true)
 
 # Variables
 
