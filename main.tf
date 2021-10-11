@@ -33,7 +33,7 @@ resource "aws_subnet" "public_1" {
   vpc_id                  = aws_vpc.presto.id
   cidr_block              = var.public_1_cidr_block
   map_public_ip_on_launch = true
-  availability_zone       = "ca-central-1b"
+  availability_zone       = "ca-central-1c"
 
   tags = {
     Name = "Presto Public Subnet 1"
@@ -81,7 +81,7 @@ resource "aws_subnet" "private_1" {
   vpc_id                  = aws_vpc.presto.id
   cidr_block              = var.private_1_cidr_block
   map_public_ip_on_launch = false
-  availability_zone       = "ca-central-1b"
+  availability_zone       = "ca-central-1c"
 
   tags = {
     Name = "Presto Private Subnet 1"
@@ -180,11 +180,11 @@ resource "aws_security_group_rule" "alb_egress" {
 }
 
 resource "aws_security_group" "coordinator" {
-  name   = "presto-coordinator"
+  name   = "presto-dbx-coordinator"
   vpc_id = aws_vpc.presto.id
 
   tags = {
-    Name = "presto-coordinator"
+    Name = "presto-dbx-coordinator"
   }
 }
 
@@ -207,11 +207,11 @@ resource "aws_security_group_rule" "coordinator_egress" {
 }
 
 resource "aws_security_group" "worker" {
-  name   = "presto-worker"
+  name   = "presto-dbx-worker"
   vpc_id = aws_vpc.presto.id
 
   tags = {
-    Name = "presto-worker"
+    Name = "presto-dbx-worker"
   }
 }
 
@@ -254,7 +254,7 @@ resource "aws_lb" "presto_alb" {
 }
 
 resource "aws_lb_target_group" "presto_target_group" {
-  name                 = "presto-coordinator-tg"
+  name                 = "presto-dbx-coordinator-tg"
   vpc_id               = aws_vpc.presto.id
   target_type          = "ip"
   port                 = 8080
@@ -315,7 +315,7 @@ data "template_file" "coordinator_container" {
 }
 
 resource "aws_ecs_task_definition" "presto_coordinator" {
-  family                   = "presto-coordinator"
+  family                   = "presto-dbx-coordinator"
   cpu                      = "2048"
   memory                   = "4096"
   network_mode             = "awsvpc"
@@ -333,7 +333,7 @@ data "template_file" "worker_container" {
 }
 
 resource "aws_ecs_task_definition" "presto_worker" {
-  family                   = "presto-worker"
+  family                   = "presto-dbx-worker"
   cpu                      = "2048"
   memory                   = "4096"
   network_mode             = "awsvpc"
@@ -342,7 +342,7 @@ resource "aws_ecs_task_definition" "presto_worker" {
 }
 
 resource "aws_ecs_service" "presto_coordinator" {
-  name                              = "presto-coordinator"
+  name                              = "presto-dbx-coordinator"
   cluster                           = aws_ecs_cluster.presto.arn
   task_definition                   = aws_ecs_task_definition.presto_coordinator.arn
   desired_count                     = 1
@@ -361,13 +361,13 @@ resource "aws_ecs_service" "presto_coordinator" {
 
   load_balancer {
     target_group_arn = aws_lb_target_group.presto_target_group.arn
-    container_name   = "presto-coordinator"
+    container_name   = "presto-dbx-coordinator"
     container_port   = "8080"
   }
 }
 
 resource "aws_ecs_service" "presto_worker" {
-  name            = "presto-worker"
+  name            = "presto-dbx-worker"
   cluster         = aws_ecs_cluster.presto.arn
   task_definition = aws_ecs_task_definition.presto_worker.arn
   desired_count   = var.cluster_capacity
